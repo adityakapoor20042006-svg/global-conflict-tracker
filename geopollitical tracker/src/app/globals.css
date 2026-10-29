@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------- */
+/* Design tokens — "Puri The Aravallis"                                    */
+/* Palette drawn from Aravalli geology: basalt, limestone, sandstone, moss */
+/* ----------------------------------------------------------------------- */
+@theme {
+  --color-basalt: #0e1410;          /* near-black, deep hill shadow */
+  --color-basalt-soft: #161d17;
+  --color-limestone: #f5f1e8;       /* warm off-white */
+  --color-limestone-dim: #e7e1d2;
+  --color-sandstone: #c9a876;       /* weathered stone accent — used sparingly */
+  --color-sandstone-soft: #ddc7a0;
+  --color-moss: #3f4a3d;            /* hill greenery accent */
+  --color-clay: #8b7355;            /* data / label earth tone */
+  --color-ridge: #2a332a;           /* mid green-black for cards/sections */
+
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-body: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "SFMono-Regular", Menlo, monospace;
+
+  --ease-contour: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-background: var(--color-basalt);
+  --color-foreground: var(--color-limestone);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-basalt);
+  color: var(--color-limestone);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sandstone);
+  color: var(--color-basalt);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sandstone);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-basalt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-clay);
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass {
+    background: color-mix(in srgb, var(--color-limestone) 7%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid color-mix(in srgb, var(--color-limestone) 14%, transparent);
+  }
+
+  .glass-dark {
+    background: color-mix(in srgb, var(--color-basalt) 55%, transparent);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid color-mix(in srgb, var(--color-limestone) 10%, transparent);
+  }
+
+  .contour-line {
+    stroke: var(--color-sandstone);
+    fill: none;
+    stroke-width: 1.25;
+  }
+
+  .text-stroke-limestone {
+    -webkit-text-stroke: 1px var(--color-limestone);
+    color: transparent;
+  }
+
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
